@@ -22,8 +22,18 @@ public class Assignment2{
 		// program logic
 		do{
 			System.out.print("Enter the number you would like to guess between 1-100: ");
-			uNum = input.nextInt();
-			
+			try{
+				uNum = input.nextInt();
+			} catch (Exception e){
+				System.out.println(e);
+				System.out.println("Enter a number between 1 and 100 (inclusive) as a valid input");
+				input.nextLine();
+				continue;
+			}
+			if(uNum < 1 || uNum > 100){
+				System.out.println("Enter a number between 1 and 100 (inclusive) as a valid inut");
+				continue;
+			}
 			difference = uNum - randNum;
 			// if difference is in the range of -10 to 10, then the guessed nember was within 10 of the random number
 			if(difference > -10 && difference < 10){
