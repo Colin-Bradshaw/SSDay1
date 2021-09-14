@@ -7,6 +7,8 @@ public class Assignment1{
 	*/
 	public static void main(String[] args){
 		Assignment1 Fo = new Assignment1();
+		// width for formatted printing
+		final int DEFAULTWIDTH = 11;
 		
 		// pattern 1
 		System.out.println("1)");
@@ -25,7 +27,7 @@ public class Assignment1{
 		//pattern 3
 		System.out.println("3)");
 		for(int i = 1; i < 9; i+=2){
-			Fo.printChar('*', i, 11);
+			Fo.printChar('*', i, (DEFAULTWIDTH - i) /2);
 		}
 		Fo.printChar('.', 11);
 		
@@ -33,7 +35,7 @@ public class Assignment1{
 		System.out.println("4)");
 		Fo.printChar('.', 11);
 		for(int i = 7; i > 0; i-=2){
-			Fo.printChar('*', i, 11);
+			Fo.printChar('*', i, (DEFAULTWIDTH - i) /2);
 		}
 	}
 	
@@ -47,19 +49,18 @@ public class Assignment1{
 		}
 	}
 	
-	// allows for left and right padding totalling (width - n) / 2
+	// allows for left padding totalling (width - n) / 2
 	// ideally, (width - n)  should be an even number
-	private void printChar(char x, int n, int width){
+	private void printChar(char x, int n, int leftpad){
 		if(n > 0) {
-			for(int i =0; i < (width - n) / 2; i++){
+			if(leftpad > 0){
 				System.out.print(' ');
-			}
-			for(int i = 0; i < n; i++){
+				printChar(x, n, leftpad-1);
+			} else {
 				System.out.print(x);
+				printChar(x, n-1, 0);
 			}
-			for(int i =0; i < (width - n) / 2; i++){
-				System.out.print(' ');
-			}
+		} else {
 			System.out.println();
 		}
 	}
